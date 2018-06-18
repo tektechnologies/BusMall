@@ -5,7 +5,7 @@ Developer Use Case Narratives
 
 # Users, Marketers, Research Group, and Focus Group Participants.
 ###### Draft a technical plan for the project(See ReadMe.md)
-#Marketing
+# Marketing
 * Marketing Focus
   * Site should be aesthetically pleasing.
   * Survey should be as easy to submit as possible(few clicks as possible)
