@@ -39,11 +39,11 @@ function Placeholder(name, src) {
 }
 Placeholder.all = [];
 
-new Placeholder('placeholder.com', 'http://via.placeholder.com/150x150');
-new Placeholder('placekitten.com', 'https://placekitten.com/g/150/150');
-new Placeholder('fillmurray.com', 'http://fillmurray.com/150/150');
-new Placeholder('placecage.com', 'http://placecage.com/150/150');
+new Placeholder('', '');
+new Placeholder('', '');
+new Placeholder('', '');
+new Placeholder('', '');
 
-console.log('all Placeholders', Placeholder.all);
+console.log('Voting Images', Placeholder.all);
 
 window.addEventListener('load', displayImages);
