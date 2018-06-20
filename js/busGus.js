@@ -1,4 +1,4 @@
-
+/*globals Chart*/
 'use strict';
 
 var nextImage = 0;
@@ -53,16 +53,16 @@ window.addEventListener('load', displayImages);
 
 ////////////////////////////////
 //This starts the Canvas js ///
-function showVotingResultChart(){
+function showResultChart(){
   var canvas = document.getElementById('resultsCanvas');
 
   //Un-hide our Canvas
   canvas.style.display = 'block';
-  
+
   var labels = [];
   var voteCounts = [];
   var showCounts = [];
-  var votePercentage = []:
+  var votePercentage = [];
 
   for(var i = 0; i < Placeholder.all.length; i++){
     labels[i] = Placeholder.all[i].name;
@@ -72,45 +72,43 @@ function showVotingResultChart(){
 
   }
 
-var ctx = canvas.msGetInputContext('2d');
-var chart = new chart(ctx, {type: 'bar', 
-data: {
-  labels: labels,
-  datasets: [{
-    label: 'Show Count',
-    backgroundColor: 'rgb(200,0,0,0.6)',
-    data: voteCounts
-  },
-{
-  label:'Show Count',
-  backgroundColor: 'rgb(0,0,200,0.4)',
-  data: showCounts
-},
-{
-  label: 'Vote %',
-  data: votePercentage
-}
-]
-},
-options:{
-  responsive: true,
-  scales: {
-    yAxes: [{
-      ticks: {
-        beginAtZero: true
+  var ctx = canvas.msGetInputContext('2d');
+  var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Show Count',
+        backgroundColor: 'rgb(200,0,0,0.6)',
+        data: voteCounts
+      },
+      {
+        label:'Show Count',
+        backgroundColor: 'rgb(0,0,200,0.4)',
+        data: showCounts
+      },
+      {
+        label: 'Vote %',
+        data: votePercentage
+      }]
+    },
+    options:{
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      },
+      title: {
+        display: true,
+        text: 'Voting Results'
       }
-    }]
-  },
-  title: {
-    display: true,
-    text: 'Voting Results'
-  }
-}
-});
+    }
+  });
 }
 
 
 
 
-
-}
