@@ -1,6 +1,10 @@
 # User Stories
 Developer Use Case Narratives
-
+# Local Storage
+* Add local storage to javascript
+  * Store infomation form display results
+  * Utilize local storage for the form. 
+  
 
 
 # Users, Marketers, Research Group, and Focus Group Participants.

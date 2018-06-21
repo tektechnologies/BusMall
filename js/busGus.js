@@ -45,11 +45,71 @@ function getNextImage(){
   return image;
 }
 
+//////////////////////////////
 
+function getRandomImage(){
+  var nextIndex = Math.floor(Math.random() * Placeholder.all.length);
+  var image = Placeholder.all[nextIndex];
+  
+  return image;
+}
+var randImg1 = getRandomImage();
+imageOne.src = randImg1.src
+randImg1.timesViewed += 1;
+
+var clickContainer = document.getElementById('clickContainer');
+if(event.target.tagName !== 'IMG'){
+//ignore click.
+  return;
+}
+document.body.addEventListener('click', function(event)){
+  console.log('click', {target: event.target, currentTarget})
+});
+//3 steps
+// set image source, save current image on the img object, track that image has been viewed
+imageOne.src = randImg1.src
+randImg1.timesViewed += 1;
+
+while(randImage1 === randImage2){
+  randImage2 = getRandomImage();
+}
+while(randImage3 === randImage1 || randImage3 === randImage2){
+  randImage3 = getRandomImage();
+}
+
+do {
+  var randImg3 = getRandomImage();
+} while (lastViewed.randImage3 === randImage1 || randImage3 === randImage2);
+
+
+//global array
+
+var lastView = [];
+
+//reset last viewed.
+var lastView = [];
+lastViewed.push(randImg1);
+lastViewed.push(randImg2);
+
+if(lastViewed.length > 3){
+  lastViewed.splice(0,3);
+  //remove first three images of array
+}
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////
 
 //display the next images.
 function displayImages() {
-  if(Placeholder.voteCount >= 25) {
+  if(Placeholder.voteCount >= 5) {
   //console.log('Display results now!')
     showResults();
     return;
@@ -104,26 +164,26 @@ Placeholder.all = [];
 
 function initialize(){
   Placeholder.voteCount = 0;
-  new Placeholder('R2D2 bag', 'images/bag.jpg');
-  new Placeholder('Thats Bannanas', 'images/banana.jpg');
-  new Placeholder('iBathroom', 'images/bathroom.jpg');
-  new Placeholder('BoostyBussin', 'images/boots.jpg');
-  new Placeholder('BreakFast Box', 'images/breakfast.jpg');
-  new Placeholder('Nope', 'images/bubblegum.jpg');
-  new Placeholder('EagerChairin', 'images/chair.jpg');
-  new Placeholder('They\'re Here', 'images/cthulhu.jpg');
-  new Placeholder('Plata-Doggie', 'images/dog-duck.jpg');
-  new Placeholder('Dragon4Dinner', 'images/dragon.jpg');
-  new Placeholder('Pen Plate', 'images/pen.jpg');
-  new Placeholder('PetSweep', 'images/pet-sweep.jpg');
-  new Placeholder('Pizscissors-A', 'images/scissors.jpg');
-  new Placeholder('SharkSleep', 'images/shark.jpg');
-  new Placeholder('Baby Clean', 'images/sweep.jpg');
-  new Placeholder('Hoth Cloth', 'images/tauntaun.jpg');
-  new Placeholder('Uni-Spam', 'images/unicorn.jpg');
-  new Placeholder('Tail TeraByte', 'images/usb.jpg');
-  new Placeholder('Water Me', 'images/water-can.jpg');
-  new Placeholder('wine-glass', 'images/wine-glass.jpg');
+  new Placeholder('R2D2 bag', 'images/bag.jpg', 7, 2);
+  new Placeholder('Thats Bannanas', 'images/banana.jpg',4,12);
+  new Placeholder('iBathroom', 'images/bathroom.jpg', 1, 4);
+  new Placeholder('BoostyBussin', 'images/boots.jpg',3,9);
+  new Placeholder('BreakFast Box', 'images/breakfast.jpg',1,4);
+  new Placeholder('Nope', 'images/bubblegum.jpg',5,9);
+  new Placeholder('EagerChairin', 'images/chair.jpg',5,9);
+  new Placeholder('They\'re Here', 'images/cthulhu.jpg',1,6);
+  new Placeholder('Plata-Doggie', 'images/dog-duck.jpg',1,5);
+  new Placeholder('Dragon4Dinner', 'images/dragon.jpg',2,6);
+  new Placeholder('Pen Plate', 'images/pen.jpg',1,5);
+  new Placeholder('PetSweep', 'images/pet-sweep.jpg',5,2);
+  new Placeholder('Pizscissors-A', 'images/scissors.jpg',5,8);
+  new Placeholder('SharkSleep', 'images/shark.jpg',6,7);
+  new Placeholder('Baby Clean', 'images/sweep.jpg',8,6);
+  new Placeholder('Hoth Cloth', 'images/tauntaun.jpg',8,5);
+  new Placeholder('Uni-Spam', 'images/unicorn.jpg',7,9);
+  new Placeholder('Tail TeraByte', 'images/usb.jpg',4,7);
+  new Placeholder('Water Me', 'images/water-can.jpg',8,1);
+  new Placeholder('wine-glass', 'images/wine-glass.jpg',5,7);
 
   console.log('Voting Images', Placeholder.all);
 
@@ -172,7 +232,7 @@ function showResultChart(){
 
   var ctx = canvas.msGetInputContext('2d');
 
-  new Chart(ctx, {
+  var chart =new Chart(ctx, {
     type: 'bar',
     data: {
       labels: labels,
