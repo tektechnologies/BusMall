@@ -45,59 +45,64 @@ function getNextImage(){
   return image;
 }
 
-//////////////////////////////
+// //////////////////////////////
 
-function getRandomImage(){
-  var nextIndex = Math.floor(Math.random() * Placeholder.all.length);
-  var image = Placeholder.all[nextIndex];
-  
-  return image;
-}
-var randImg1 = getRandomImage();
-imageOne.src = randImg1.src
-randImg1.timesViewed += 1;
+// function getRandomImage(){
+//   var nextIndex = Math.floor(Math.random() * Placeholder.all.length);
+//   var image = Placeholder.all[nextIndex];
 
-var clickContainer = document.getElementById('clickContainer');
-if(event.target.tagName !== 'IMG'){
-//ignore click.
-  return;
-}
-document.body.addEventListener('click', function(event)){
-  console.log('click', {target: event.target, currentTarget})
-});
-//3 steps
-// set image source, save current image on the img object, track that image has been viewed
-imageOne.src = randImg1.src
-randImg1.timesViewed += 1;
+//   return image;
+// }
+// var randImg1 = getRandomImage();
+// imageOne.src = randImg1.src
+// randImg1.timesViewed += 1;
 
-while(randImage1 === randImage2){
-  randImage2 = getRandomImage();
-}
-while(randImage3 === randImage1 || randImage3 === randImage2){
-  randImage3 = getRandomImage();
-}
+// var clickContainer = document.getElementById('clickContainer');
+// if(event.target.tagName !== 'IMG'){
+// //ignore click.
+//   return;
+// }
+// voteCount++;
+// if (voteCount > maxVotes){
+//   return;
+// }
 
-do {
-  var randImg3 = getRandomImage();
-} while (lastViewed.randImage3 === randImage1 || randImage3 === randImage2);
+// document.body.addEventListener('click', function(event)){
+//   console.log('click', {target: event.target, currentTarget})
+// });
+// //3 steps
+// // set image source, save current image on the img object, track that image has been viewed
+// imageOne.src = randImg1.src
+// randImg1.timesViewed += 1;
 
+// while(randImage1 === randImage2){
+//   randImage2 = getRandomImage();
+// }
+// while(randImage3 === randImage1 || randImage3 === randImage2){
+//   randImage3 = getRandomImage();
+// }
 
-//global array
-
-var lastView = [];
-
-//reset last viewed.
-var lastView = [];
-lastViewed.push(randImg1);
-lastViewed.push(randImg2);
-
-if(lastViewed.length > 3){
-  lastViewed.splice(0,3);
-  //remove first three images of array
-}
+// do {
+//   var randImg3 = getRandomImage();
+// } while (lastViewed.randImage3 === randImage1 || randImage3 === randImage2);
 
 
+// //global array
 
+// var lastView = [];
+
+// //reset last viewed.
+// var lastView = [];
+// lastViewed.push(randImg1);
+// lastViewed.push(randImg2);
+
+// if(lastViewed.length > 3){
+//   lastViewed.splice(0,3);
+//   //remove first three images of array
+// }
+
+
+//todays notes from classs.
 
 
 
