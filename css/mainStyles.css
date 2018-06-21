@@ -12,15 +12,21 @@ body {
 }
 
 h1 {
+	font-size: 36px;
+	color: white;
 	margin: 10;
 	margin-left: 300px;
 	padding: 5;
 }
 h2 {
+	font-size: 18px;
+	color: white;
 	margin: 10;
 	padding: 5;
 }
 h3 {
+	font-size: 16px;
+	color: white;
 	margin: 10;
 	padding: 5;
 }
@@ -40,15 +46,18 @@ h3 {
 	text-transform: uppercase;
 	margin-left: 260px;
 	padding-top: 15px;
+	color: white;
 }
 
 .surveyText p {
+	color: white;
 	font-size: 16px;
 	margin-left: 20px;
 	padding-top: 15px;
 }
 
 header {
+	position: relative;	/* positioned relative to me non-static */
 	background-color: #212922;
 	color: #fff;
 	padding: 20px;
@@ -60,17 +69,19 @@ header img {
 	margin-right: 10;
 }
 
-ul {
-	width: 600px;
-	overflow: auto;
+nav ul {
+	position:absolute;
+	top:0;
+	right:0;
+	/* overflow: auto; */
 	border: 1px solid white;
 }
 
-ul li {
-	width: 33.33333333%;
+nav ul li {
+	/* width: 33.33333333%; */
+	margin-top: 35px;
 	float: left;
 	padding-right: 5px;
-	/* margin-top: -45px; */
 	list-style-type: none;
 	border: 1px solid yellow;
 }
@@ -78,7 +89,7 @@ ul li {
 .rightnav a {
 	color: #fff;
 	display: inline-block;
-	background-color: #3e6259;
+	background-color: #43caa8;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
 	padding: 20px;
@@ -88,6 +99,16 @@ ul li {
 img {
 	max-width: 100%;
 }
+
+
+.voteImageList li { 
+	width: 33.33333333%;
+	float: left;
+}
+
+
+
+
 
 .product-wrapper {
 	float: right;
@@ -119,3 +140,23 @@ footer {
 	color: #fff;
 }
 
+@media screen and (max-width: 1024px) {
+  header img {
+		display: none;
+	}
+	h1 {
+		margin-left: 0px;		
+	}
+}
+@media screen and (max-width: 650px){
+
+nav ul {
+	position: static;
+ 
+}
+nav {clear: both;
+overflow: hidden;
+
+}
+h1{display: none;}
+}
