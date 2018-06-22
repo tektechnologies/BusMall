@@ -28,13 +28,14 @@ function loadFromStorage(){
   var jsonStringFromStorage = localStorage['placeholders'];
   if(!jsonStringFromStorage)
     return;
+
   Placeholder.all = [];
   var arrayFromStorage = JSON.parse(jsonStringFromStorage);
   for(var i = 0; i < arrayFromStorage.length; i ++){
     var arrayItem = arrayFromStorage[i];
     new Placeholder(arrayItem.name, arrayItem.src, arrayItem.showCount, arrayItem.voteCount);
   }
-  //console.log('fromStorage', Placeholder.all);
+  console.log('fromStorage', Placeholder.all);
 }
 //get next image for display, TODO: randomize those bits.
 
@@ -45,11 +46,82 @@ function getNextImage(){
   return image;
 }
 
+/////////////////////////////////
+// for (var i = 0; i < Placeholder.all.length; i++) {
+//   Placeholder.all[i].voteCount = Math.floor(5 + Math.random() * 500);
+//   Placeholder.all[i].showCount = Math.floor(20 + Math.random() * 1000);
+// }
 
+// //////////////////////////////
+
+// function getRandomImage(){
+//   var nextIndex = Math.floor(Math.random() * Placeholder.all.length);
+//   var image = Placeholder.all[nextIndex];
+
+//   return image;
+// }
+// var randImg1 = getRandomImage();
+// imageOne.src = randImg1.src
+// randImg1.timesViewed += 1;
+
+// var clickContainer = document.getElementById('clickContainer');
+// if(event.target.tagName !== 'IMG'){
+// //ignore click.
+//   return;
+// }
+// voteCount++;
+// if (voteCount > maxVotes){
+//   return;
+// }
+
+// document.body.addEventListener('click', function(event)){
+//   console.log('click', {target: event.target, currentTarget})
+// });
+// //3 steps
+// // set image source, save current image on the img object, track that image has been viewed
+// imageOne.src = randImg1.src
+// randImg1.timesViewed += 1;
+
+// while(randImage1 === randImage2){
+//   randImage2 = getRandomImage();
+// }
+// while(randImage3 === randImage1 || randImage3 === randImage2){
+//   randImage3 = getRandomImage();
+// }
+
+// do {
+//   var randImg3 = getRandomImage();
+// } while (lastViewed.randImage3 === randImage1 || randImage3 === randImage2);
+
+
+// //global array
+
+// var lastView = [];
+
+// //reset last viewed.
+// var lastView = [];
+// lastViewed.push(randImg1);
+// lastViewed.push(randImg2);
+
+// if(lastViewed.length > 3){
+//   lastViewed.splice(0,3);
+//   //remove first three images of array
+// }
+
+
+//todays notes from classs.
+
+
+
+
+
+
+
+/////////////////////////////
 
 //display the next images.
 function displayImages() {
-  if(Placeholder.voteCount >= 25) {
+  if(Placeholder.voteCount >= 5) {
   //console.log('Display results now!')
     showResults();
     return;
@@ -82,11 +154,12 @@ function displayImages() {
 }
 
 var productImages = document.querySelectorAll('#voting img');
-for(var i = 0; i < productImages.length; i++) {
+for(var i = 0; i < productImages.length; i++){
   productImages[i].addEventListener('click', function (event) {
     Placeholder.voteCount++;
     event.target.currentPlaceholder.voteCount++;
-    // saveAll();
+    saveAll();
+    //After vote, replace images for new vote
     displayImages();
   });
 }
@@ -100,10 +173,12 @@ function Placeholder(name, src, testShowCount, testVoteCount) {
   //Add this instance to our catalog of placeholders
   Placeholder.all.push(this);
 }
-Placeholder.all = [];
+
 
 function initialize(){
   Placeholder.voteCount = 0;
+  Placeholder.all = [];
+
   new Placeholder('R2D2 bag', 'images/bag.jpg');
   new Placeholder('Thats Bannanas', 'images/banana.jpg');
   new Placeholder('iBathroom', 'images/bathroom.jpg');
@@ -130,11 +205,10 @@ function initialize(){
   saveAll();
 }
 
-
+//console.log('All PlaceHolder:  ', Placeholder.all);
 //show current results
 function showResults(){
-  document.getElementById('results');
-
+  document.getElementById('resultsWrapper').style.display = 'block';
   var ul = document.getElementById('results');
   //reset list
   ul.innerHTML = '';
@@ -166,30 +240,33 @@ function showResultChart(){
     labels[i] = Placeholder.all[i].name;
     voteCounts[i] = Placeholder.all[i].voteCount;
     showCounts[i] = Placeholder.all[i].showCount;
+    //calculates % of times image got votes out of all times shown.
     votePercentage[i] = 100 * voteCounts[i] / showCounts[i];
 
   }
 
-  var ctx = canvas.msGetInputContext('2d');
+  var ctx = canvas.getContext('2d');
 
   new Chart(ctx, {
     type: 'bar',
+
     data: {
       labels: labels,
-      datasets: [{
-        label: 'Vote Count',
-        backgroundColor: 'rgb(200,0,0,0.6)',
-        data: voteCounts
-      },
-      {
-        label:'Show Count',
-        backgroundColor: 'rgb(0,0,200,0.4)',
-        data: showCounts
-      },
-      {
-        label: 'Vote %',
-        data: votePercentage
-      }
+      datasets: [
+        {
+          label: 'Vote Count',
+          backgroundColor: 'rgb(200,0,0,0.6)',
+          data: voteCounts
+        },
+        {
+          label:'Show Count',
+          backgroundColor: 'rgb(0,0,200,0.4)',
+          data: showCounts
+        },
+        {
+          label: 'Vote %',
+          data: votePercentage
+        }
       ]
     },
     options:{
