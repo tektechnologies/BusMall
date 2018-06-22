@@ -154,7 +154,7 @@ function displayImages() {
 }
 
 var productImages = document.querySelectorAll('#voting img');
-for(var i = 0; i < productImages.length; i++) {
+for(var i = 0; i < productImages.length; i++){
   productImages[i].addEventListener('click', function (event) {
     Placeholder.voteCount++;
     event.target.currentPlaceholder.voteCount++;
@@ -245,7 +245,7 @@ function showResultChart(){
 
   }
 
-  var ctx = canvas.msGetInputContext('2d');
+  var ctx = canvas.getContext('2d');
 
   new Chart(ctx, {
     type: 'bar',
