@@ -28,13 +28,14 @@ function loadFromStorage(){
   var jsonStringFromStorage = localStorage['placeholders'];
   if(!jsonStringFromStorage)
     return;
+
   Placeholder.all = [];
   var arrayFromStorage = JSON.parse(jsonStringFromStorage);
   for(var i = 0; i < arrayFromStorage.length; i ++){
     var arrayItem = arrayFromStorage[i];
     new Placeholder(arrayItem.name, arrayItem.src, arrayItem.showCount, arrayItem.voteCount);
   }
-  //console.log('fromStorage', Placeholder.all);
+  console.log('fromStorage', Placeholder.all);
 }
 //get next image for display, TODO: randomize those bits.
 
@@ -44,6 +45,12 @@ function getNextImage(){
   console.log(image.src);
   return image;
 }
+
+/////////////////////////////////
+// for (var i = 0; i < Placeholder.all.length; i++) {
+//   Placeholder.all[i].voteCount = Math.floor(5 + Math.random() * 500);
+//   Placeholder.all[i].showCount = Math.floor(20 + Math.random() * 1000);
+// }
 
 // //////////////////////////////
 
@@ -151,7 +158,8 @@ for(var i = 0; i < productImages.length; i++) {
   productImages[i].addEventListener('click', function (event) {
     Placeholder.voteCount++;
     event.target.currentPlaceholder.voteCount++;
-    // saveAll();
+    saveAll();
+    //After vote, replace images for new vote
     displayImages();
   });
 }
@@ -165,41 +173,42 @@ function Placeholder(name, src, testShowCount, testVoteCount) {
   //Add this instance to our catalog of placeholders
   Placeholder.all.push(this);
 }
-Placeholder.all = [];
+
 
 function initialize(){
   Placeholder.voteCount = 0;
-  new Placeholder('R2D2 bag', 'images/bag.jpg', 7, 2);
-  new Placeholder('Thats Bannanas', 'images/banana.jpg',4,12);
-  new Placeholder('iBathroom', 'images/bathroom.jpg', 1, 4);
-  new Placeholder('BoostyBussin', 'images/boots.jpg',3,9);
-  new Placeholder('BreakFast Box', 'images/breakfast.jpg',1,4);
-  new Placeholder('Nope', 'images/bubblegum.jpg',5,9);
-  new Placeholder('EagerChairin', 'images/chair.jpg',5,9);
-  new Placeholder('They\'re Here', 'images/cthulhu.jpg',1,6);
-  new Placeholder('Plata-Doggie', 'images/dog-duck.jpg',1,5);
-  new Placeholder('Dragon4Dinner', 'images/dragon.jpg',2,6);
-  new Placeholder('Pen Plate', 'images/pen.jpg',1,5);
-  new Placeholder('PetSweep', 'images/pet-sweep.jpg',5,2);
-  new Placeholder('Pizscissors-A', 'images/scissors.jpg',5,8);
-  new Placeholder('SharkSleep', 'images/shark.jpg',6,7);
-  new Placeholder('Baby Clean', 'images/sweep.jpg',8,6);
-  new Placeholder('Hoth Cloth', 'images/tauntaun.jpg',8,5);
-  new Placeholder('Uni-Spam', 'images/unicorn.jpg',7,9);
-  new Placeholder('Tail TeraByte', 'images/usb.jpg',4,7);
-  new Placeholder('Water Me', 'images/water-can.jpg',8,1);
-  new Placeholder('wine-glass', 'images/wine-glass.jpg',5,7);
+  Placeholder.all = [];
+
+  new Placeholder('R2D2 bag', 'images/bag.jpg');
+  new Placeholder('Thats Bannanas', 'images/banana.jpg');
+  new Placeholder('iBathroom', 'images/bathroom.jpg');
+  new Placeholder('BoostyBussin', 'images/boots.jpg');
+  new Placeholder('BreakFast Box', 'images/breakfast.jpg');
+  new Placeholder('Nope', 'images/bubblegum.jpg');
+  new Placeholder('EagerChairin', 'images/chair.jpg');
+  new Placeholder('They\'re Here', 'images/cthulhu.jpg');
+  new Placeholder('Plata-Doggie', 'images/dog-duck.jpg');
+  new Placeholder('Dragon4Dinner', 'images/dragon.jpg');
+  new Placeholder('Pen Plate', 'images/pen.jpg');
+  new Placeholder('PetSweep', 'images/pet-sweep.jpg');
+  new Placeholder('Pizscissors-A', 'images/scissors.jpg');
+  new Placeholder('SharkSleep', 'images/shark.jpg');
+  new Placeholder('Baby Clean', 'images/sweep.jpg');
+  new Placeholder('Hoth Cloth', 'images/tauntaun.jpg');
+  new Placeholder('Uni-Spam', 'images/unicorn.jpg');
+  new Placeholder('Tail TeraByte', 'images/usb.jpg');
+  new Placeholder('Water Me', 'images/water-can.jpg');
+  new Placeholder('wine-glass', 'images/wine-glass.jpg');
 
   console.log('Voting Images', Placeholder.all);
 
   saveAll();
 }
 
-
+//console.log('All PlaceHolder:  ', Placeholder.all);
 //show current results
 function showResults(){
-  document.getElementById('results');
-
+  document.getElementById('resultsWrapper').style.display = 'block';
   var ul = document.getElementById('results');
   //reset list
   ul.innerHTML = '';
@@ -231,30 +240,33 @@ function showResultChart(){
     labels[i] = Placeholder.all[i].name;
     voteCounts[i] = Placeholder.all[i].voteCount;
     showCounts[i] = Placeholder.all[i].showCount;
+    //calculates % of times image got votes out of all times shown.
     votePercentage[i] = 100 * voteCounts[i] / showCounts[i];
 
   }
 
   var ctx = canvas.msGetInputContext('2d');
 
-  var chart =new Chart(ctx, {
+  new Chart(ctx, {
     type: 'bar',
+
     data: {
       labels: labels,
-      datasets: [{
-        label: 'Vote Count',
-        backgroundColor: 'rgb(200,0,0,0.6)',
-        data: voteCounts
-      },
-      {
-        label:'Show Count',
-        backgroundColor: 'rgb(0,0,200,0.4)',
-        data: showCounts
-      },
-      {
-        label: 'Vote %',
-        data: votePercentage
-      }
+      datasets: [
+        {
+          label: 'Vote Count',
+          backgroundColor: 'rgb(200,0,0,0.6)',
+          data: voteCounts
+        },
+        {
+          label:'Show Count',
+          backgroundColor: 'rgb(0,0,200,0.4)',
+          data: showCounts
+        },
+        {
+          label: 'Vote %',
+          data: votePercentage
+        }
       ]
     },
     options:{

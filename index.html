@@ -1,108 +1,85 @@
 
 
 <html>
-    <head>
-       <title>Bus Mall</title>
-       <meta name="viewport" content="width=device-width, initial-scale=1">
-       <link rel="stylesheet" href="css/reset.css" />
-       <link rel="stylesheet" href="css/mainStyles.css" />
-    </head>
-    <body>
-       <header>
-          <img src="images/logo.png" />
-          <h1>Bus Mall Survey</h1>
-          <nav class="rightnav">
-             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-             </ul>
-          </nav>
-       </header>
-    
-      
-       <section>
-          <div class="product-wrapper">
-             <section id="voting">
-                <h2>Receive your complimentary bus ride once you have completed the survey!</h2>
-
-                <!-- product-1 -->
-                <h3>Are you ready to VOTE!?!</h3>
-                <ul class="voteImageList">
-                   <li>
-                      <h3>Option 1</h3>
-                      <img id="product-1"/>
-                   </li>
-                   <!-- product-2 -->
-                   <li>
-                      <h3>Option 2</h3>
-                      <img id="product-2"/>
-                   </li>
-                   <!-- product-3 -->
-                   <li>
-                      <h3>Option 3</h3>
-                      <img id="product-3"/>
-                   </li>
-                </ul>
-                <button type="reset">Reset Results</button>
-             
-            
-            
-            </section>
-             
-             
-             
-
-
-
-
-             <div class="voteButton">
-                <p>Please click on image to select you choice.</p>
-             </div>
-             <div class="surveyText">
-                <p>Cedar Rapids is a vibrant city, encompassing unique attractions,
-                   exciting events, specialty shopping, a dynamic art scene, and a large 
-                   variety of restaurant and nightlife options. You’ll find that Cedar Rapids
-                   offers one of the best places to live, work and play in the Midwest.
-                   Every year the Cedar Rapids community experiences the wonders of changing
-                   seasons in our Midwestern landscape. Some say that taking the time to appreciate 
-                   everyday beauty extends life, almost like an extra season is added to every year.
-                   Cedar Rapids offers a unique balance of big city amenities without all the typical
-                   hassles and headaches that come with a large city.  This extra time afforded to our
-                   residents and visitors is why Cedar Rapids is known as “The City of Five Seasons.” 
-                   This fifth season affords us time to enjoy all other seasons, and to enjoy life.
-                </p>
-             </div>
-             
-             
-          </div>
-
-
-          <aside>
-            <a href="">
-               <img src="http://via.placeholder.com/300x300" />
-               <p>Advertisement Available</p>
-            </a>
-         </aside>
-
-
-      </section>
-      
-      <section id="resultsWrapper">
-        
-
-        <canvas id="resultsCanvas"></canvas>
-
-        <ul id="results"></ul>
-        
+  <head>
+     <title>Bus Mall</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="stylesheet" href="css/reset.css" />
+     <link rel="stylesheet" href="css/mainStyles.css" />
+  </head>
+  <body>
+     <header>
+        <img src="images/logo.png" />
+        <h1>Bus Mall Survey</h1>
+        <nav class="rightnav">
+           <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="products.html">Products</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+           </ul>
+        </nav>
+     </header>
+     <section>
+        <div class="product-wrapper">
+           <section id="voting">
+              <h2>Receive your complimentary bus ride once you have completed the survey!</h2>
+              <!-- product-1 -->
+              <h3>Are you ready to VOTE!?!</h3>
+              <ul class="voteImageList">
+                 <li>
+                    <h3>Option 1</h3>
+                    <img id="product-1"/>
+                 </li>
+                 <!-- product-2 -->
+                 <li>
+                    <h3>Option 2</h3>
+                    <img id="product-2"/>
+                 </li>
+                 <!-- product-3 -->
+                 <li>
+                    <h3>Option 3</h3>
+                    <img id="product-3"/>
+                 </li>
+              </ul>
+              
+           </section>
+           <section id="resultsWrapper">
+              <button type="reset">Reset Results</button>
+              <canvas id="resultsCanvas"></canvas>
+              <ul id="results"></ul>
+           </section>
+           <div class="voteButton">
+              <p>Please click on image to select you choice.</p>
+           </div>
+           <div class="surveyText">
+              <p>Cedar Rapids is a vibrant city, encompassing unique attractions,
+                 exciting events, specialty shopping, a dynamic art scene, and a large 
+                 variety of restaurant and nightlife options. You’ll find that Cedar Rapids
+                 offers one of the best places to live, work and play in the Midwest.
+                 Every year the Cedar Rapids community experiences the wonders of changing
+                 seasons in our Midwestern landscape. Some say that taking the time to appreciate 
+                 everyday beauty extends life, almost like an extra season is added to every year.
+                 Cedar Rapids offers a unique balance of big city amenities without all the typical
+                 hassles and headaches that come with a large city.  This extra time afforded to our
+                 residents and visitors is why Cedar Rapids is known as “The City of Five Seasons.” 
+                 This fifth season affords us time to enjoy all other seasons, and to enjoy life.
+              </p>
+           </div>
+        </div>
+        <aside>
+           <!-- <a href="">
+              <img src="http://via.placeholder.com/300x300" />
+              <p>Advertisement Available</p>
+           </a> -->
+           
+        </aside>
      </section>
-       <footer>
-          &copy; Craig | DeltaV Demo
-       </footer>
-       <script src="js/library/Chart.bundle.js"></script>
-       <script src="js/busGus.js"></script>
-    </body>
- </html>
- 
- 
+     <footer>
+        &copy; Craig | DeltaV Demo
+     </footer>
+     <script src="js/library/Chart.bundle.js"></script>
+     <script src="js/busGus.js"></script>
+  </body>
+</html>
+
