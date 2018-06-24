@@ -4,7 +4,6 @@
 
 window.addEventListener('load', function onLoad(){
   loadFromStorage();
-
   if(Placeholder.all.length === 0){
     initialize();
   }
@@ -121,12 +120,12 @@ function getNextImage(){
 
 //display the next images.
 function displayImages() {
-  if(Placeholder.voteCount >= 5) {
+  if(Placeholder.voteCount >= 25) {
   //console.log('Display results now!')
     showResults();
     return;
   }
-
+  
   document.getElementById('resultsWrapper').style.display = 'none';
 
   // Display image1
