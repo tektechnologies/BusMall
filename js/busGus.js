@@ -1,9 +1,9 @@
-/*globals Chart*/
+//*globals Chart*/
 'use strict';
 
 
 window.addEventListener('load', function onLoad(){
-  loadFromStorage();
+// loadFromStorage();
   if(Placeholder.all.length === 0){
     initialize();
   }
@@ -12,36 +12,36 @@ window.addEventListener('load', function onLoad(){
 
 // Local Storage
 function saveAll() {
-  localStorage['voteHistory'] = JSON.stringify({voteCount: Placeholder.voteCount});
+// localStorage['voteHistory'] = JSON.stringify({voteCount: Placeholder.voteCount});
   localStorage['placeholders'] = JSON.stringify(Placeholder.all);
 //console.log(localStorage);
 }
 
-function loadFromStorage(){
-  var jsonVoteHistoryString = localStorage['voteHistory'];
-  if(jsonVoteHistoryString){
-    var voteHistory = JSON.parse(jsonVoteHistoryString);
-    Placeholder.voteCount = voteHistory.voteCount;
-    //console.log('Setting voteCount to ' + Placeholder.voteCount);
-  }
-  var jsonStringFromStorage = localStorage['placeholders'];
-  if(!jsonStringFromStorage)
-    return;
+// function loadFromStorage(){
+//   var jsonVoteHistoryString = localStorage['voteHistory'];
+//   if(jsonVoteHistoryString){
+//     var voteHistory = JSON.parse(jsonVoteHistoryString);
+//     Placeholder.voteCount = voteHistory.voteCount;
+//     //console.log('Setting voteCount to ' + Placeholder.voteCount);
+//   }
+//   var jsonStringFromStorage = localStorage['placeholders'];
+//   if(!jsonStringFromStorage)
+//     return;
 
-  Placeholder.all = [];
-  var arrayFromStorage = JSON.parse(jsonStringFromStorage);
-  for(var i = 0; i < arrayFromStorage.length; i ++){
-    var arrayItem = arrayFromStorage[i];
-    new Placeholder(arrayItem.name, arrayItem.src, arrayItem.showCount, arrayItem.voteCount);
-  }
-  console.log('fromStorage', Placeholder.all);
-}
+//   Placeholder.all = [];
+//   var arrayFromStorage = JSON.parse(jsonStringFromStorage);
+//   for(var i = 0; i < arrayFromStorage.length; i ++){
+//     var arrayItem = arrayFromStorage[i];
+//     new Placeholder(arrayItem.name, arrayItem.src, arrayItem.showCount, arrayItem.voteCount);
+//   }
+//   console.log('fromStorage', Placeholder.all);
+// }
 //get next image for display, TODO: randomize those bits.
 
 function getNextImage(){
   var nextIndex = Math.floor(Math.random() * Placeholder.all.length);
   var image = Placeholder.all[nextIndex];
-  console.log(image.src);
+  //console.log(image.src);
   return image;
 }
 
@@ -122,7 +122,7 @@ function getNextImage(){
 function displayImages() {
   if(Placeholder.voteCount >= 25) {
   //console.log('Display results now!')
-    showResults();
+    //showResults();
     return;
   }
   
@@ -152,16 +152,16 @@ function displayImages() {
   //Todo: track that image2 was shown.
 }
 
-var productImages = document.querySelectorAll('#voting img');
-for(var i = 0; i < productImages.length; i++){
-  productImages[i].addEventListener('click', function (event) {
-    Placeholder.voteCount++;
-    event.target.currentPlaceholder.voteCount++;
-    saveAll();
-    //After vote, replace images for new vote
-    displayImages();
-  });
-}
+// var productImages = document.querySelectorAll('#voting img');
+// for(var i = 0; i < productImages.length; i++){
+//   productImages[i].addEventListener('click', function (event) {
+//     Placeholder.voteCount++;
+//     event.target.currentPlaceholder.voteCount++;
+//     saveAll();
+//     //After vote, replace images for new vote
+//     displayImages();
+//   });
+// }
 
 function Placeholder(name, src, testShowCount, testVoteCount) {
   this.name = name;
@@ -175,7 +175,7 @@ function Placeholder(name, src, testShowCount, testVoteCount) {
 
 
 function initialize(){
-  Placeholder.voteCount = 0;
+  //Placeholder.voteCount = 0;
   Placeholder.all = [];
 
   new Placeholder('R2D2 bag', 'images/bag.jpg');
@@ -199,97 +199,99 @@ function initialize(){
   new Placeholder('Water Me', 'images/water-can.jpg');
   new Placeholder('wine-glass', 'images/wine-glass.jpg');
 
-  console.log('Voting Images', Placeholder.all);
+  //console.log('Voting Images', Placeholder.all);
 
   saveAll();
 }
 
 //console.log('All PlaceHolder:  ', Placeholder.all);
 //show current results
-function showResults(){
-  document.getElementById('resultsWrapper').style.display = 'block';
-  var ul = document.getElementById('results');
-  //reset list
-  ul.innerHTML = '';
-  //for each placholder image...
-  for(var i = 0; i < Placeholder.all.length; i++){
-    var current = Placeholder.all[i];
-    //add to <ul id="results">
-    var li = document.createElement('li');
-    li.textContent = current.name + ' got ' + current.voteCount + ' votes';
-    ul.appendChild(li);
-  }
-  showResultChart();
-}
+// function showResults(){
+//   document.getElementById('resultsWrapper').style.display = 'block';
+//   var ul = document.getElementById('results');
+//   //reset list
+//   ul.innerHTML = '';
+//   //for each placholder image...
+//   for(var i = 0; i < Placeholder.all.length; i++){
+//     var current = Placeholder.all[i];
+//     //add to <ul id="results">
+//     var li = document.createElement('li');
+//     li.textContent = current.name + ' got ' + current.voteCount + ' votes';
+//     ul.appendChild(li);
+//   }
+//   showResultChart();
+// }
 
 ////////////////////////////////
 //This starts the Canvas js ///
-function showResultChart(){
-  var canvas = document.getElementById('resultsCanvas');
+// function showResultChart(){
+//   var canvas = document.getElementById('resultsCanvas');
 
-  //Un-hide our Canvas
-  canvas.style.display = 'block';
+//   //Un-hide our Canvas
+//   canvas.style.display = 'block';
 
-  var labels = [];
-  var voteCounts = [];
-  var showCounts = [];
-  var votePercentage = [];
+//   var labels = [];
+//   var voteCounts = [];
+//   var showCounts = [];
+//   var votePercentage = [];
 
-  for(var i = 0; i < Placeholder.all.length; i++){
-    labels[i] = Placeholder.all[i].name;
-    voteCounts[i] = Placeholder.all[i].voteCount;
-    showCounts[i] = Placeholder.all[i].showCount;
-    //calculates % of times image got votes out of all times shown.
-    votePercentage[i] = 100 * voteCounts[i] / showCounts[i];
+//   for(var i = 0; i < Placeholder.all.length; i++){
+//     labels[i] = Placeholder.all[i].name;
+//     voteCounts[i] = Placeholder.all[i].voteCount;
+//     showCounts[i] = Placeholder.all[i].showCount;
+//     //calculates % of times image got votes out of all times shown.
+//     votePercentage[i] = 100 * voteCounts[i] / showCounts[i];
 
-  }
+//   }
 
-  var ctx = canvas.getContext('2d');
+//   var ctx = canvas.getContext('2d');
 
-  new Chart(ctx, {
-    type: 'bar',
+//   new Chart(ctx, {
+//     type: 'bar',
 
-    data: {
-      labels: labels,
-      datasets: [
-        {
-          label: 'Vote Count',
-          backgroundColor: 'rgb(200,0,0,0.6)',
-          data: voteCounts
-        },
-        {
-          label:'Show Count',
-          backgroundColor: 'rgb(0,0,200,0.4)',
-          data: showCounts
-        },
-        {
-          label: 'Vote %',
-          data: votePercentage
-        }
-      ]
-    },
-    options:{
-      responsive: true,
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }
-        ]
-      },
-      title: {
-        display: true,
-        text: 'Voting Results'
-      }
-    }
-  });
-}
+//     data: {
+//       labels: labels,
+//       datasets: [
+//         {
+//           label: 'Vote Count',
+//           backgroundColor: 'rgb(200,0,0,0.6)',
+//           data: voteCounts
+//         },
+//         {
+//           label:'Show Count',
+//           backgroundColor: 'rgb(0,0,200,0.4)',
+//           data: showCounts
+//         },
+//         {
+//           label: 'Vote %',
+//           data: votePercentage
+//         }
+//       ]
+//     },
+//     options:{
+//       responsive: true,
+//       scales: {
+//         yAxes: [{
+//           ticks: {
+//             beginAtZero: true
+//           }
+//         }
+//         ]
+//       },
+//       title: {
+//         display: true,
+//         text: 'Voting Results'
+//       }
+//     }
+//   });
+// }
 
 
 var resetButton = document.querySelector('button[type="reset"]');
+
 resetButton.addEventListener('click', function resetClick(event){
   console.log('reset click', event);
   initialize();
   displayImages();
 });
+
